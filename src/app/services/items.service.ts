@@ -14,7 +14,7 @@ export class ItemsService {
   ];
 
   // declare a method to allow other components to get access to our items
-  getItems() {
+  getItems(): void {
     // we'll push a copy of our data out through our subject
     // this prevents other components directly referencing the original data
     this.items$.next(this.items.slice());

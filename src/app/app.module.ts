@@ -8,10 +8,16 @@ import { AppComponent } from './app.component';
 // import our services
 import { ItemsService } from './services/items.service';
 
+// import compponents
+import { StorefrontComponent } from './components/storefront/storefront.component';
+import { ProductComponent } from './components/product/product.component';
+
 // declare our module
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StorefrontComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule
