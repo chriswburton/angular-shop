@@ -13,8 +13,7 @@ import { ItemsService } from '../../services/items.service';
 export class ProductDetailComponent implements OnInit {
   product: Item;
 
-  constructor(private _router: Router,
-              private _route: ActivatedRoute, 
+  constructor(private _route: ActivatedRoute, 
               private _itemsService: ItemsService) { }
 
   ngOnInit() {
@@ -22,17 +21,7 @@ export class ProductDetailComponent implements OnInit {
     // this will allow us keep content updated even if the component is not re-created
     this._route.params
       .subscribe((params: Params) => {  
-        const responseData = this._itemsService.getItemById(+params.id);
-        // does the product exist?
-        if (responseData === false) {
-          // it does not exist - we'll force a redirect
-          this._router.navigate(['/store'], {
-            relativeTo: this._route,
-            queryParams: { error: true }
-          });
-        } else {
-          this.product = responseData;
-        }
+        this.product = this._itemsService.getItemById(+params.id);
       });     
   }
 

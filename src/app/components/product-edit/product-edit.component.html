@@ -1,0 +1,6 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <input type="hidden" formControlName="id">
+  <input type="text" formControlName="title" placeholder="Enter a title for this store item...">
+  <input type="number" formControlName="price" placeholder="Enter a price for this item...">
+  <button role="button">Submit</button>
+</form>
