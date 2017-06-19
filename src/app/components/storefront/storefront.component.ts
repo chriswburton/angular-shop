@@ -1,5 +1,6 @@
 // import framework dependencies
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 // import our required resources
@@ -17,12 +18,17 @@ export class StorefrontComponent implements OnInit, OnDestroy {
   // declare our properties
   items: Item[] = [];
   itemSubscription: Subscription;
+  redirectedFromError: boolean;
 
   // get access to our app-wide instance of our ItemService
-  constructor(private _itemsService: ItemsService) {}
+  constructor(private _itemsService: ItemsService,
+              private _route: ActivatedRoute) {}
 
   // run our initialisation logic
   ngOnInit() { 
+    // have we been redirected here after an error?
+    this.redirectedFromError = this._route.snapshot.queryParams.error;
+
     // create a subscription to our shared item data
     this.itemSubscription = this._itemsService
       .items$.subscribe((items: Item[]) => this.items = items);

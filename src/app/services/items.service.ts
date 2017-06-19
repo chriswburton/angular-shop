@@ -21,8 +21,16 @@ export class ItemsService {
   }
 
   // a helper function to fetch items for us
-  getItemById(id: number): Item { 
-    return this.items.filter(item => item.id === id)[0];           
+  getItemById(id: number): Item | false {
+    // we must check the item exists before we return it
+    const filteredItems = this.items.filter(item => item.id === id);
+    if (filteredItems.length > 0) {
+      // we found a match - we'll return it
+      return filteredItems[0];
+    } else {
+      // no match was found! We'll redirect to the storefront
+      return false;
+    }              
   }
 
 }

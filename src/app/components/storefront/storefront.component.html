@@ -1,5 +1,6 @@
 <div>
   <h1>Angular Shop</h1>
+  <p *ngIf="redirectedFromError">An error occured!</p>
   <ul>
     <app-product *ngFor="let item of items"
       [item]="item"
