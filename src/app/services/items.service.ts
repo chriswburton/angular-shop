@@ -20,4 +20,9 @@ export class ItemsService {
     this.items$.next(this.items.slice());
   }
 
+  // a helper function to fetch items for us
+  getItemById(id: number): Item { 
+    return this.items.filter(item => item.id === id)[0];           
+  }
+
 }

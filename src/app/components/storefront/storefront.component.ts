@@ -1,5 +1,5 @@
 // import framework dependencies
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 // import our required resources
@@ -13,7 +13,7 @@ import { ProductComponent } from '../product/product.component';
   templateUrl: './storefront.component.html',
   styleUrls: ['./storefront.component.css']
 })
-export class StorefrontComponent implements OnInit {
+export class StorefrontComponent implements OnInit, OnDestroy {
   // declare our properties
   items: Item[] = [];
   itemSubscription: Subscription;
@@ -28,6 +28,11 @@ export class StorefrontComponent implements OnInit {
       .items$.subscribe((items: Item[]) => this.items = items);
     // fetch our item data
     this._itemsService.getItems();    
+  }
+
+  // to avoid any memory leaking, we'll clean up our item subscription on exit
+  ngOnDestroy() {
+    this.itemSubscription.unsubscribe();
   }
 
 }
